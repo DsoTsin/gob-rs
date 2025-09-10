@@ -63,23 +63,27 @@ impl<R: std::io::Read + std::io::Seek> Decoder<R> {
     pub fn parse(&mut self) -> Result<()> {
         loop {
             let msg_length = self.read_uint()? as usize;
-            println!("msg_length: {}", &msg_length);
+            //println!("msg_length: {}", &msg_length);
             
             let mut payload = vec![0; msg_length];
             self.reader.read_exact(&mut payload)?;
 
             let mut msg_decoder = Decoder::new(std::io::Cursor::new(payload));
             let type_id = msg_decoder.read_int()?;
-            println!("type_id: {}", type_id);
+            println!("msgLength={} type_id: {}", msg_length, type_id);
 
             if type_id < 0 {
-                let num = msg_decoder.read_int()?;
-                let num0 = msg_decoder.read_int()?;
-                let num1 = msg_decoder.read_int()?;
-                let num2 = msg_decoder.read_int()?;
-                let num3 = msg_decoder.read_int()?;
-                let num4 = msg_decoder.read_int()?;
-                println!("num: {} {} {} {} {} {}", num, num0, num1, num2, num3, num4);
+                let num = msg_decoder.read_uint()?;
+                let mut kvs = Vec::new();
+                for _ in 0..num {
+                    let ktid = msg_decoder.read_int()?;
+                    let vtid = msg_decoder.read_int()?;
+                    kvs.push((ktid, vtid));
+                }
+                println!("map count: {}", num);
+                for (ktid, vtid) in kvs {
+                    println!("  ktid={} vtid={}", ktid, vtid);
+                }
             }
             // let len = msg_reader.read_varint::<u64>()?;
             // let len2 = msg_reader.read_varint::<u64>()?;
