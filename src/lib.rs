@@ -1,6 +1,7 @@
 mod object;
 mod encode;
-mod decode;
+pub mod decode;
+pub mod types;
 
 // #[derive(Debug, thiserror::Error)]
 // pub enum Error {
