@@ -1,0 +1,65 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Debug unit tests in library 'gob_rs'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test"
+                ]
+            }
+        },
+        {
+            "name": "Debug executable 'gob-rs'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "run",
+                    "--bin=gob-rs"
+                ]
+            },
+            "args": ["goth-session.bin"]
+        },
+        {
+            "name": "Debug unit tests in executable 'gob-rs'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--bin=gob-rs"
+                ]
+            }
+        },
+        {
+            "name": "Debug executable 'hexdump'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "run",
+                    "--bin=hexdump"
+                ]
+            },
+            "args": []
+        },
+        {
+            "name": "Debug unit tests in executable 'hexdump'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--bin=hexdump"
+                ]
+            }
+        }
+    ]
+}
