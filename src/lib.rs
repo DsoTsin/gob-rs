@@ -13,3 +13,4 @@ pub mod types;
 pub type Result<T> = std::result::Result<T, std::io::Error>;
 
 pub use decode::Decoder;
+pub use encode::Encoder;
